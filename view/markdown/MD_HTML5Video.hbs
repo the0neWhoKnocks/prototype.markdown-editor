@@ -1,0 +1,20 @@
+{{#if sources}}
+<div class="html5-video__container">
+  <video preload="metadata" controls="controls" poster="{{vidThumb}}"{{#if vidWidth}} width="{{vidWidth}}"{{/if}}{{#if vidHeight}} height="{{vidHeight}}"{{/if}}>
+  {{#each sources}}
+    {{! types [mp4, ogg, webm]}}
+    <source src="{{vidSrc}}" type="video/{{@key}}">
+  {{/each}}
+  {{#if flashPlayer}}{{#if sources.mp4}}
+    <object type="application/x-shockwave-flash" data="{{flashPlayer}}" width="{{vidWidth}}" height="{{vidHeight}}">
+      <param name="src" value="{{flashPlayer}}" />
+      <param name="wmode" value="opaque" />
+      <param name="flashvars" value="name={{sources.mp4.vidSrc}}&imgName={{vidThumb}}" />
+      <!--[if IE]><param name="movie" value="{{flashPlayer}}"><![endif]-->
+      <img src="{{vidThumb}}" width="{{vidWidth}}" height="{{vidHeight}}" alt="Video">
+      <p>Your browser can't play HTML5 video. <a href="{{sources.mp4.vidSrc}}">Download it</a> instead.</p>
+    </object>
+  {{/if}}{{/if}}
+  </video>
+</div>
+{{/if}}
